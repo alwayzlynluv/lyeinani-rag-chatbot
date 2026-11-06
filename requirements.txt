@@ -1,0 +1,13 @@
+# scraper
+playwright
+requests
+# chatbot
+sentence-transformers
+pypdf
+numpy
+transformers
+torch
+accelerate
+streamlit
+# optional: only if you want Claude instead of the free local model
+# anthropic
