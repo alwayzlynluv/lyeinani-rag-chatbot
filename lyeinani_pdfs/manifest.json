@@ -1,0 +1,548 @@
+[
+  {
+    "url": "https://www.lyeinani.com/",
+    "title": "LYEINANI",
+    "file": "home.pdf",
+    "page_type": "home",
+    "scraped_at": "2026-11-07T22:05:28+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/agents.md",
+    "title": "",
+    "file": "agents.md.pdf",
+    "page_type": "agents.md",
+    "scraped_at": "2026-11-07T22:05:31+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/bad-waifu-e-gift-card",
+    "title": "LYEINANI E-Gift Card",
+    "file": "products__bad-waifu-e-gift-card.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:05:42+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/tenseiga-blazer-copy",
+    "title": "Crimson Fang Blazer \u2013 LYEINANI",
+    "file": "products__tenseiga-blazer-copy.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:06:09+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/lady-sango",
+    "title": "Lady Sango Bodysuit \u2013 LYEINANI",
+    "file": "products__lady-sango.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:06:18+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/crimson-fang-blazer-copy-1",
+    "title": "Ito Ito Corset \u2013 LYEINANI",
+    "file": "products__crimson-fang-blazer-copy-1.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:06:28+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/pretty-soldier-mini-dress-black",
+    "title": "Pretty Soldier Mini Dress \u2013 LYEINANI",
+    "file": "products__pretty-soldier-mini-dress-black.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:06:43+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/yura-blazer",
+    "title": "Thread of Fate Blazer \u2013 LYEINANI",
+    "file": "products__yura-blazer.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:06:59+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/nezuko-blazer-1",
+    "title": "Crimson Bloom Blazer \u2013 LYEINANI",
+    "file": "products__nezuko-blazer-1.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:07:11+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/saiyan-warrior-bodysuit",
+    "title": "Saiyan Warrior Bodysuit (4XL) \u2013 LYEINANI",
+    "file": "products__saiyan-warrior-bodysuit.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:07:21+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/capsule-corp-bodysuit",
+    "title": "Capsule Corp Bodysuit \u2013 LYEINANI",
+    "file": "products__capsule-corp-bodysuit.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:07:29+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/sukuna-pant",
+    "title": "Cursed Arc Trouser \u2013 LYEINANI",
+    "file": "products__sukuna-pant.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:07:38+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/cursed-arc-denim-copy",
+    "title": "Cursed Vessel Vest \u2013 LYEINANI",
+    "file": "products__cursed-arc-denim-copy.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:07:45+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/cursed-arc-denim-copy-1",
+    "title": "Overtime Halter Vest \u2013 LYEINANI",
+    "file": "products__cursed-arc-denim-copy-1.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:07:54+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/skirt",
+    "title": "LYEINANI Varsity Skort",
+    "file": "products__skirt.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:08:12+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/monk-veil-blazer-preorder",
+    "title": "Monk Veil Blazer \u2013 LYEINANI",
+    "file": "products__monk-veil-blazer-preorder.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:08:20+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/100-package-deal-1",
+    "title": "$150 Package Deal \u2013 LYEINANI",
+    "file": "products__100-package-deal-1.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:08:32+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/75-package-deal-1",
+    "title": "$100 Package Deal \u2013 LYEINANI",
+    "file": "products__75-package-deal-1.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:08:40+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/custom-collection-consultation-fee",
+    "title": "Brand Support Fee \u2013 LYEINANI",
+    "file": "products__custom-collection-consultation-fee.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:08:49+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/moon-prism-crewneck",
+    "title": "Moon Prism '92 Sweatshirt (100% Cotton) [Preorder] \u2013 LYEINANI",
+    "file": "products__moon-prism-crewneck.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:09:10+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/black-lady-crewneck",
+    "title": "Black Crystal '92 Sweatshirt (100% Cotton) [Preorder] \u2013 LYEINANI",
+    "file": "products__black-lady-crewneck.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:09:19+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/kino-92-sweatshirt",
+    "title": "Kino '92 Sweatshirt (100% Cotton) [Preorder] \u2013 LYEINANI",
+    "file": "products__kino-92-sweatshirt.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:09:41+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/aino-92-sweatshirt",
+    "title": "Aino '92 Sweatshirt (100% Cotton) [Preorder] \u2013 LYEINANI",
+    "file": "products__aino-92-sweatshirt.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:10:02+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/blossom-halter-vest",
+    "title": "Sakura Halter Vest [Preorder] \u2013 LYEINANI",
+    "file": "products__blossom-halter-vest.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:10:21+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/gyomei-halter-vest",
+    "title": "Stone Pillar Halter Vest [Preorder] \u2013 LYEINANI",
+    "file": "products__gyomei-halter-vest.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:10:41+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/giyu-halter-vest",
+    "title": "Kikko Halter Vest [Preorder] \u2013 LYEINANI",
+    "file": "products__giyu-halter-vest.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:11:03+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/pretty-soldier-halter-vest",
+    "title": "Moonlight Halter Vest [Preorder] \u2013 LYEINANI",
+    "file": "products__pretty-soldier-halter-vest.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:11:24+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/products/sesshomaru-halter-vest",
+    "title": "Duality Halter Vest [Preorder] \u2013 LYEINANI",
+    "file": "products__sesshomaru-halter-vest.pdf",
+    "page_type": "products",
+    "scraped_at": "2026-11-07T22:11:44+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/pages/about-us",
+    "title": "About Us \u2013 LYEINANI",
+    "file": "pages__about-us.pdf",
+    "page_type": "pages",
+    "scraped_at": "2026-11-07T22:11:49+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/pages/refund-exchange-policy",
+    "title": "RETURN POLICY \u2013 LYEINANI",
+    "file": "pages__refund-exchange-policy.pdf",
+    "page_type": "pages",
+    "scraped_at": "2026-11-07T22:11:55+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/pages/terms-of-services",
+    "title": "Terms of Services \u2013 LYEINANI",
+    "file": "pages__terms-of-services.pdf",
+    "page_type": "pages",
+    "scraped_at": "2026-11-07T22:12:03+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/pages/privacy-policy",
+    "title": "Privacy Policy \u2013 LYEINANI",
+    "file": "pages__privacy-policy.pdf",
+    "page_type": "pages",
+    "scraped_at": "2026-11-07T22:12:08+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/pages/shipping-policy",
+    "title": "Shipping Policy \u2013 LYEINANI",
+    "file": "pages__shipping-policy.pdf",
+    "page_type": "pages",
+    "scraped_at": "2026-11-07T22:12:14+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/pages/contact-us",
+    "title": "Contact Us \u2013 LYEINANI",
+    "file": "pages__contact-us.pdf",
+    "page_type": "pages",
+    "scraped_at": "2026-11-07T22:12:20+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/pages/faq-1",
+    "title": "FAQ \u2013 LYEINANI",
+    "file": "pages__faq-1.pdf",
+    "page_type": "pages",
+    "scraped_at": "2026-11-07T22:12:26+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/pages/lookbook",
+    "title": "Lookbook \u2013 LYEINANI",
+    "file": "pages__lookbook.pdf",
+    "page_type": "pages",
+    "scraped_at": "2026-11-07T22:12:32+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/pages/career-opportunities",
+    "title": "Career Opportunities \u2013 LYEINANI",
+    "file": "pages__career-opportunities.pdf",
+    "page_type": "pages",
+    "scraped_at": "2026-11-07T22:12:38+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/pages/pre-order-status",
+    "title": "PRE-ORDER (PRETA) \u2013 LYEINANI",
+    "file": "pages__pre-order-status.pdf",
+    "page_type": "pages",
+    "scraped_at": "2026-11-07T22:12:43+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/pages/bundles",
+    "title": "Bundles \u2013 LYEINANI",
+    "file": "pages__bundles.pdf",
+    "page_type": "pages",
+    "scraped_at": "2026-11-07T22:12:48+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/pages/blackmarket",
+    "title": "BLACK MARKET \u2013 LYEINANI",
+    "file": "pages__blackmarket.pdf",
+    "page_type": "pages",
+    "scraped_at": "2026-11-07T22:12:56+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/pages/custom-design-style",
+    "title": "Custom Design Style \u2013 LYEINANI",
+    "file": "pages__custom-design-style.pdf",
+    "page_type": "pages",
+    "scraped_at": "2026-11-07T22:13:01+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/pages/custom-design-collection",
+    "title": "Brand Support \u2013 LYEINANI",
+    "file": "pages__custom-design-collection.pdf",
+    "page_type": "pages",
+    "scraped_at": "2026-11-07T22:13:07+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/frontpage",
+    "title": "Bodysuit \u2013 LYEINANI",
+    "file": "collections__frontpage.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:13:13+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/new-releases",
+    "title": "Fresh Drops \u2013 LYEINANI",
+    "file": "collections__new-releases.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:13:23+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/bottoms",
+    "title": "Bottom \u2013 LYEINANI",
+    "file": "collections__bottoms.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:13:28+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/tops",
+    "title": "Tops \u2013 LYEINANI",
+    "file": "collections__tops.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:13:35+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/coat-jacket",
+    "title": "Outerwear \u2013 LYEINANI",
+    "file": "collections__coat-jacket.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:13:41+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/dresses",
+    "title": "Formal \u2013 LYEINANI",
+    "file": "collections__dresses.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:13:47+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/demon-slayer",
+    "title": "Demon Slayer \u2013 LYEINANI",
+    "file": "collections__demon-slayer.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:13:51+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/sale",
+    "title": "Sales \u2013 LYEINANI",
+    "file": "collections__sale.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:13:59+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/bags",
+    "title": "Arsenal \u2013 LYEINANI",
+    "file": "collections__bags.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:14:04+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/accessories",
+    "title": "Accessories \u2013 LYEINANI",
+    "file": "collections__accessories.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:14:08+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/hunter-x-hunter",
+    "title": "Hunter X Hunter \u2013 LYEINANI",
+    "file": "collections__hunter-x-hunter.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:14:13+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/low-stock",
+    "title": "LOW STOCK \u2013 LYEINANI",
+    "file": "collections__low-stock.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:14:18+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/valentine-day",
+    "title": "Valentine Day \u2013 LYEINANI",
+    "file": "collections__valentine-day.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:14:22+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/full-collection",
+    "title": "FULL COLLECTION \u2013 LYEINANI",
+    "file": "collections__full-collection.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:14:31+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/preorders",
+    "title": "Preorders \u2013 LYEINANI",
+    "file": "collections__preorders.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:14:37+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/product-bundles",
+    "title": "Product Bundles \u2013 LYEINANI",
+    "file": "collections__product-bundles.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:14:43+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/blazers",
+    "title": "Blazers \u2013 LYEINANI",
+    "file": "collections__blazers.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:14:50+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/dresses-1",
+    "title": "Dresses \u2013 LYEINANI",
+    "file": "collections__dresses-1.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:14:55+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/inu-yasha-collection",
+    "title": "Inu Yasha Collection \u2013 LYEINANI",
+    "file": "collections__inu-yasha-collection.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:15:03+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/jjk-collection",
+    "title": "JJK Collection \u2013 LYEINANI",
+    "file": "collections__jjk-collection.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:15:09+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/consultation",
+    "title": "Consultation \u2013 LYEINANI",
+    "file": "collections__consultation.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:15:15+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/tokyo-92-club",
+    "title": "Tokyo '92 Collection \u2013 LYEINANI",
+    "file": "collections__tokyo-92-club.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:15:24+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/blogs/news",
+    "title": "LIFESTYLE \u2013 LYEINANI",
+    "file": "blogs__news.pdf",
+    "page_type": "blogs",
+    "scraped_at": "2026-11-07T22:15:30+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/blogs/first-edition",
+    "title": "First Edition \u2013 LYEINANI",
+    "file": "blogs__first-edition.pdf",
+    "page_type": "blogs",
+    "scraped_at": "2026-11-07T22:15:35+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/blogs/news-1",
+    "title": "NEWS \u2013 LYEINANI",
+    "file": "blogs__news-1.pdf",
+    "page_type": "blogs",
+    "scraped_at": "2026-11-07T22:15:39+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/blogs/first-edition/blog",
+    "title": "Blog \u2013 LYEINANI",
+    "file": "blogs__first-edition__blog.pdf",
+    "page_type": "blogs",
+    "scraped_at": "2026-11-07T22:15:44+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/blogs/news/the-ultimate-guide-to-anime-inspired-fashion",
+    "title": "The Ultimate Guide to Anime-Inspired Fashion \u2013 LYEINANI",
+    "file": "blogs__news__the-ultimate-guide-to-anime-inspired-fashion.pdf",
+    "page_type": "blogs",
+    "scraped_at": "2026-11-07T22:15:50+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/blogs/news/anime-culture-and-fashion",
+    "title": "Anime Culture and Fashion \u2013 LYEINANI",
+    "file": "blogs__news__anime-culture-and-fashion.pdf",
+    "page_type": "blogs",
+    "scraped_at": "2026-11-07T22:15:55+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/blogs/news/why-we-stand-out-in-the-world-of-anime-inspired-fashion",
+    "title": "Why We Stand Out in the World of Anime-Inspired Fashion \u2013 LYEINANI",
+    "file": "blogs__news__why-we-stand-out-in-the-world-of-anime-inspired-fashion.pdf",
+    "page_type": "blogs",
+    "scraped_at": "2026-11-07T22:16:02+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/policies/privacy-policy",
+    "title": "Privacy policy \u2013 LYEINANI",
+    "file": "policies__privacy-policy.pdf",
+    "page_type": "policies",
+    "scraped_at": "2026-11-07T22:16:07+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/collections/all",
+    "title": "Products \u2013 LYEINANI",
+    "file": "collections__all.pdf",
+    "page_type": "collections",
+    "scraped_at": "2026-11-07T22:16:18+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/customer_authentication/redirect",
+    "title": "Sign in - LYEINANI",
+    "file": "customer_authentication__redirect.pdf",
+    "page_type": "customer_authentication",
+    "scraped_at": "2026-11-07T22:16:25+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/policies/shipping-policy",
+    "title": "Shipping policy \u2013 LYEINANI",
+    "file": "policies__shipping-policy.pdf",
+    "page_type": "policies",
+    "scraped_at": "2026-11-07T22:16:32+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/policies/refund-policy",
+    "title": "Refund policy \u2013 LYEINANI",
+    "file": "policies__refund-policy.pdf",
+    "page_type": "policies",
+    "scraped_at": "2026-11-07T22:16:41+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/policies/terms-of-service",
+    "title": "Terms of service \u2013 LYEINANI",
+    "file": "policies__terms-of-service.pdf",
+    "page_type": "policies",
+    "scraped_at": "2026-11-07T22:16:48+00:00"
+  },
+  {
+    "url": "https://www.lyeinani.com/policies/contact-information",
+    "title": "Contact information \u2013 LYEINANI",
+    "file": "policies__contact-information.pdf",
+    "page_type": "policies",
+    "scraped_at": "2026-11-07T22:16:54+00:00"
+  }
+]
