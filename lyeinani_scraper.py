@@ -47,6 +47,8 @@ SKIP_PATH_PREFIXES = (
     "/cart", "/checkout", "/checkouts", "/account", "/orders", "/search",
     "/password", "/admin", "/cdn/", "/apps/", "/services/", "/tools/",
     "/challenge", "/recommendations", "/wpm@",
+    "/customer_authentication",  # login redirect, no content
+    "/pages/blackmarket",        # private ordering channel, keep out of the public knowledge base
 )
 SKIP_EXTENSIONS = (
     ".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".ico", ".pdf", ".zip",

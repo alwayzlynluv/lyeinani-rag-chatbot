@@ -404,15 +404,23 @@ class ClaudeLLM:
         return "".join(b.text for b in resp.content if b.type == "text").strip()
 
 
-def build_messages(question, hits, history):
+def build_messages(question, hits, history, previous_question=None):
     context = "\n\n".join(
         f"[{n}] {h['title']} ({h['url'] or h['file']})\n{h['text']}"
         for n, h in enumerate(hits, 1)
     )
     msgs = [m for m in (history or [])[-HISTORY_TURNS:] if m["role"] in ("user", "assistant")]
+    earlier = ""
+    if previous_question:
+        # Context only: lets "what about the vest?" be understood without the
+        # model answering the earlier question again.
+        earlier = (f'The customer\'s earlier question, already answered: "{previous_question}". '
+                   "Use it only to understand what the current question refers to. "
+                   "Do not repeat or re-answer it, and do not mention products from it.\n")
     msgs.append({
         "role": "user",
-        "content": f"<context>\n{context}\n</context>\n\nCustomer question: {question}",
+        "content": f"<context>\n{context}\n</context>\n\n{earlier}"
+                   f"Current customer question: {question}\nAnswer only the current question.",
     })
     return msgs
 
@@ -447,7 +455,8 @@ class LyeinaniBot:
         # for both retrieval and the LLM.
         standalone = question
         prev_user = next((m["content"] for m in reversed(history or []) if m["role"] == "user"), None)
-        if prev_user and len(question.split()) < 6:
+        follow_up = bool(prev_user) and len(question.split()) < 6
+        if follow_up:
             standalone = f'{question} (follow-up to the earlier question: "{prev_user}")'
         retrieval_vec = q_vec if standalone == question else self.embedder.encode([standalone])[0]
         hits = self.pdfs.search(retrieval_vec, query_text=question)
@@ -458,7 +467,8 @@ class LyeinaniBot:
 
         # Step 3: grounded generation
         llm_history = history if getattr(self.llm, "use_history", True) else None
-        answer = self.llm.generate(SYSTEM_PROMPT, build_messages(standalone, hits, llm_history))
+        answer = self.llm.generate(SYSTEM_PROMPT, build_messages(
+            question, hits, llm_history, previous_question=prev_user if follow_up else None))
         return {
             "answer": answer,
             "route": "rag",
@@ -496,8 +506,9 @@ EVAL_SET = [
     {"q": "How much is the Capsule Corp Bodysuit?", "route": "rag", "must": ["70"]},
     {"q": "How much is the Aino '92 Sweatshirt?", "route": "rag", "must": ["125"]},
     {"q": "How much is the Cursed Arc Trouser?", "route": "rag", "must": ["110"]},
-    {"q": "what about the vest?", "follow_up": True, "route": "rag", "must": ["75"], "must_not": ["110"]},
-    {"q": "What's in the Tokyo 1992 collection?", "route": "rag", "must": ["Aino"], "must_not": ["Pretty Soldier"]},
+    # Follow-up: must give the Cursed Vessel Vest's $75 and must not drift back to the trouser.
+    {"q": "what about the vest?", "follow_up": True, "route": "rag", "must": ["75"], "must_not": ["Trouser"]},
+    {"q": "What's in the Tokyo 1992 collection?", "route": "rag", "must": ["Aino", "Kino"]},
     {"q": "Do you sell kitchen appliances?", "must_not": ["$"]},
 ]
 
