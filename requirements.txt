@@ -3,6 +3,7 @@ playwright
 requests
 # chatbot
 sentence-transformers
+chromadb
 pypdf
 numpy
 transformers
