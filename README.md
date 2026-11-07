@@ -110,33 +110,48 @@ Every paraphrase scored 0.67 or higher, and every product question scored 0.48 o
 
 **8. Put it all in a Colab notebook.** `lyeinani_rag_chatbot.ipynb` runs the whole project step by step on a free GPU, from scraping to a live demo of the chat app.
 
-**9. Fixed the mistakes from my first run and measured the result.** My first run got two answers wrong (see Limitations below), so I made four changes:
+**9. Fixed the mistakes from my first run and measured the result.** My first run got the vest follow-up wrong (see Limitations below), so I made four changes:
 - **Follow-ups:** the bot no longer shows the model its own past answers. A short follow-up like "what about the vest?" is rewritten into a full question that includes the earlier one.
 - **Retrieval:** the page-title boost and score cut-off described in step 4, so a product's own page beats the home page and blog posts that only mention it.
 - **Instructions:** the model must copy names and prices exactly, never move a price from one product to another, and only list items that appear on a collection's own page.
 - **Model:** I moved up from Qwen2.5-1.5B to Qwen2.5-3B, which still fits Colab's free GPU.
 
-To measure the changes, I wrote an accuracy test (`run_eval` in `rag_bot.py`, section 4d of the notebook): 10 questions with known right answers from my site, including both questions it got wrong the first time. Each answer is checked for the facts it must contain, the wrong facts it must not contain, and the route it should take.
+To measure the changes, I wrote an accuracy test (`run_eval` in `rag_bot.py`, section 4d of the notebook): 10 questions with known right answers from my site, including the follow-up it got wrong the first time. Each answer is checked for the facts it must contain, the wrong facts it must not contain, and the route it should take.
 
-RESULTS_PLACEHOLDER
+**Round 1 (Qwen2.5-3B with the fixes above): 8/10 on my first test, 9/10 after I corrected the test.**
+- Both misses taught me something. My test said the Tokyo '92 answer must not mention the Pretty Soldier Mini Dress, but that dress *is* part of the collection. The bot was right and my test was wrong, so I fixed the test.
+- The vest follow-up got the right price this time ($75 for the Cursed Vessel Vest) and listed my other vests. But it also went back to the earlier question and stated a different price for the Cursed Arc Trouser, which I hadn't asked about.
+
+**Round 2: keeping follow-ups on topic.** The model now receives the earlier question only as context, labeled "already answered", with an instruction to answer only the current question and not mention products from the earlier one. The test now checks that the vest answer contains $75 and doesn't mention the trouser.
+
+**Round 2 result: 10/10.** The vest follow-up now answers only about vests ("The Cursed Vessel Vest costs $75.00 USD. Another vest available is the Overtime Halter Vest..."), and every product price, policy answer and route in the test was correct.
+
+| Version | Model | Accuracy test |
+|---|---|---|
+| First run | Qwen2.5-1.5B | Vest follow-up wrong ($110 instead of $75); no automated test yet |
+| Round 1 fixes | Qwen2.5-3B | 8/10 (9/10 once my own test was corrected) |
+| Round 2 fixes (final) | Qwen2.5-3B + ChromaDB | **10/10** |
+
+A 10-question test is small, so this shows the fixes worked on the cases I know about, not that the bot is perfect. Growing the test set is part of my next steps.
 
 ## Outcome
 
-- A working chatbot that answers customer questions about LYEINANI from my own website and my own written answers.
+- A working chatbot that answers customer questions about LYEINANI from my own website (76 pages, 198 chunks in ChromaDB) and my own written answers (22 Q&A pairs, 74 phrasings).
+- **10/10 on my accuracy test** in the final version, up from a wrong answer on follow-ups in my first run.
 - My most common questions get my exact answer instantly, with no model involved.
 - Everything else is answered from my site pages, with the sources shown.
 - When the bot can't find an answer, it says so and points customers to my email instead of making something up.
-- It runs entirely on free tools: Colab, open-source models and Streamlit.
+- It runs entirely on free tools: Colab, open-source models, ChromaDB and Streamlit.
 
-**What I learned:** testing with real questions mattered more than my starting assumptions. The threshold I picked first (0.80) looked reasonable but sent most real customer phrasings past my own answers, and I only caught that by measuring the scores. The run also showed where the free model is weakest: follow-up questions.
+**What I learned:** testing with real questions mattered more than my starting assumptions. The threshold I picked first (0.80) looked reasonable but sent most real customer phrasings past my own answers, and I only caught that by measuring the scores. The runs also showed where the free model is weakest, follow-up questions, and that a test can be wrong too: one "miss" was my test's mistake, not the bot's.
 
 **Limitations:** in my first version, the free 1.5B model made mistakes on follow-ups. In my test, I asked "How much is the Cursed Arc Trouser?" (correct: $110) and then "what about the vest?". It answered $110 for the Cursed Vessel Vest, copying the price from its previous answer, when my site lists the vest at $75. The right pages were retrieved, so the mistake was in the answer writing (see step 9 for the fix). The scraped site is a snapshot, so I re-run the scraper when my site changes. And the answers I added in my Q&A set should also go on my policy pages, so both sources agree.
 
-**Next steps:** embed the assistant on my Shopify store, turn it into a chat bubble on every page, and add automatic answer-quality checks (for example, with RAGAS).
+**Next steps:** embed the assistant on my Shopify store, turn it into a chat bubble on every page, and grow my accuracy test well beyond 10 questions, and add automatic answer-quality checks (for example, with RAGAS).
 
 ## Examples
 
-These are real outputs from my Colab run. Q&A answers come back exactly as I wrote them; RAG answers are written by the model from my site pages.
+These are real outputs from my Colab runs: examples 1–6 from my first full run, and example 7 from my final version. Q&A answers come back exactly as I wrote them; RAG answers are written by the model from my site pages.
 
 **1. Stored Q&A match**
 > **Customer:** Who pays for return shipping?
@@ -187,10 +202,22 @@ These are real outputs from my Colab run. Q&A answers come back exactly as I wro
 >
 > *Route: RAG*
 
+**7. Follow-up question, final version**
+> **Customer:** How much is the Cursed Arc Trouser?
+>
+> **Assistant:** The Cursed Arc Trouser costs $110.00 USD.
+>
+> **Customer:** what about the vest?
+>
+> **Assistant:** The Cursed Vessel Vest costs $75.00 USD. Another vest available is the Overtime Halter Vest at $90.00 USD.
+>
+> *Route: RAG. In my first run, this follow-up wrongly answered $110 by copying the trouser's price.*
+
 ## Project files
 
 | File | What it is |
 |---|---|
+| `PROJECT_REPORT.pdf` | Project report: purpose, architecture, process, evaluation, outcome |
 | `lyeinani_rag_chatbot.ipynb` | Colab notebook that runs the whole project step by step |
 | `lyeinani_scraper.py` | Scrapes my site into one PDF per page plus `manifest.json` |
 | `lyeinani_qa_set.json` | My 22 Q&A pairs (d2) |
