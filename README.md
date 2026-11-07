@@ -20,8 +20,10 @@ This was also my project for showing applied skills in Retrieval-Augmented Gener
 - **Data source 1 (d1): my website.** I scraped every page of lyeinani.com and saved each one as a PDF, which gives the bot a full copy of my product pages, collections and policies.
 - **Data source 2 (d2): my Q&A set.** I wrote 22 question-and-answer pairs covering returns, exchanges, shipping, customs, preorders, contact and my Brand Support service. Each one includes several ways a customer might phrase the question.
 - **How it answers:** the bot checks my Q&A set first. If the question closely matches one of mine, it gives my stored answer word for word. If not, it searches my site pages and has a language model write an answer using only what it found, with sources.
-- **Model:** a free, open-source model (Qwen2.5-1.5B-Instruct) that runs inside Google Colab. No paid service or API key is needed.
-- **Interface:** a Streamlit chat app that shows every answer along with where it came from.
+- **Vector database:** both sources are embedded and stored in **ChromaDB**, a persistent vector database, and searched by meaning.
+- **Model:** a free, open-source model (Qwen2.5-3B-Instruct) that runs inside Google Colab. No paid service or API key is needed.
+- **Interface:** a branded Streamlit chat app that labels every answer with where it came from, shows sources, and collects 👍/👎 feedback.
+- **Evaluation:** an automated accuracy test that checks answers against known right answers from my site.
 
 ## How it works (mapping)
 
@@ -34,10 +36,10 @@ flowchart LR
     PDF --> T[Extract text<br/>remove menu/footer]
     T --> C[Split into chunks]
     C --> E1[Embed chunks]
-    E1 --> V[(PDF vector index)]
+    E1 --> V[(ChromaDB<br/>site_pages)]
 
     Q[My 22 Q&A pairs<br/>+ variants] --> E2[Embed questions]
-    E2 --> QV[(Q&A index)]
+    E2 --> QV[(ChromaDB<br/>qa_pairs)]
 ```
 
 ### Answering a question
@@ -45,9 +47,9 @@ flowchart LR
 ```mermaid
 flowchart TD
     U[Customer question] --> E[Embed the question]
-    E --> M{Close match to one<br/>of my Q&A questions?<br/>score ≥ 0.80}
+    E --> M{Close match to one<br/>of my Q&A questions?<br/>score ≥ 0.65}
     M -- yes --> A1[Return my stored answer<br/>+ its source page]
-    M -- no --> R[Search my site pages<br/>for the top 5 chunks]
+    M -- no --> R[ChromaDB search: 20 candidates<br/>re-ranked to the best 4 chunks]
     R --> F{Anything relevant?}
     F -- no --> A3[Fallback: email<br/>info@lyeinaniofficial.com]
     F -- yes --> L[LLM writes an answer<br/>using only those chunks]
@@ -73,19 +75,50 @@ Each pair has a category, several alternate phrasings and its source page (`lyei
 
 **4. Built the RAG pipeline (`rag_bot.py`).**
 - **Embeddings:** `all-MiniLM-L6-v2` turns questions and text into vectors, so the bot can match by meaning, not exact words.
-- **Q&A routing:** every incoming question is compared with all my stored questions and variants. A score of 0.80 or higher counts as a strong match.
+- **Vector database:** the vectors live in a persistent **ChromaDB** database with two collections, `site_pages` (my scraped pages) and `qa_pairs` (my 74 question phrasings), using cosine similarity. Each collection is named by a fingerprint of its source data, so it rebuilds automatically when my site or Q&A file changes.
+- **Re-ranking:** ChromaDB returns 20 candidate chunks. I boost chunks from the page the question names (for example, the Crimson Bloom Blazer's own page), drop chunks that score far below the best one, and keep the top 4.
+- **Q&A routing:** every incoming question is compared with all my stored questions and variants. A score of 0.65 or higher counts as a strong match (see step 5).
 - **Cleaning:** every page of my site repeats the same menu and footer. I remove lines that appear on most pages so they don't crowd out the real content.
 - **Chunking:** page text is split into roughly 900-character pieces with some overlap, each tagged with its page title.
 - **Grounded answers:** the model is told to answer only from the retrieved excerpts, cite them, never invent prices, dates or policies, and ignore any instructions inside page content.
 - **Follow-ups:** chat history is passed along, so a question like "what about the vest?" keeps its context.
 
-**5. Tuned the threshold.** I tested paraphrases of my stored questions (which should match my Q&A set) against product questions (which should go to the site search) and checked that 0.80 separated them correctly.
+**5. Tuned the threshold.** I started with a threshold of 0.80 and tested it on 6 paraphrases of my stored questions (which should match my Q&A set) and 4 product questions (which should go to the site search). The product questions were handled correctly, scoring 0.14–0.48. But 0.80 was too strict: only 1 of the 6 paraphrases matched. For example, "can i get a refund" scored 0.769 against my stored "Do you offer refunds?" and was wrongly sent to the site search.
 
-**6. Switched to a free model.** My first version used the Claude API, which needs a paid API key. I didn't want this project to depend on a paid account, so I switched the default to Qwen2.5-1.5B-Instruct, a free open-source model that runs on Colab's free GPU. The Claude option is still in the code if I ever add a key.
+| Question | Score | Closest stored question |
+|---|---|---|
+| my preorder is the wrong size can i swap it | 0.850 | Can I change the size of my preorder? |
+| is there a fee for customs | 0.789 | Who pays customs fees or duties? |
+| can i get a refund | 0.769 | Do you offer refunds? |
+| do you guys ship to the UK | 0.736 | Do you ship internationally? |
+| how many days do i have to exchange something | 0.727 | How many days do I have to return something? |
+| who covers the cost of sending a return back | 0.670 | Who pays for return shipping? |
+| *do you have any bodysuits (product)* | *0.480* | *What kind of clothes do you sell?* |
+| *how much is the Crimson Bloom Blazer (product)* | *0.450* | *How much is shipping?* |
 
-**7. Built the chat app (`app.py`).** The Streamlit app uses `st.chat_input` and `st.chat_message` for the conversation, `st.session_state` to keep the chat history, and `@st.cache_resource` so the models and indexes load once instead of on every question. Each answer shows whether it came from my Q&A set or my site pages, with links, which helps customers trust it and helps me debug. A slider lets me adjust the match threshold live.
+Every paraphrase scored 0.67 or higher, and every product question scored 0.48 or lower, so I lowered the threshold to **0.65**, which separates the two groups cleanly.
+
+**6. Switched to a free model.** My first version used the Claude API, which needs a paid API key. I didn't want this project to depend on a paid account, so I switched the default to a free open-source Qwen2.5 model that runs on Colab's free GPU (first 1.5B, then 3B; see step 9). The Claude option is still in the code if I ever add a key.
+
+**7. Built the chat app (`app.py`).** The Streamlit app uses `st.chat_input` and `st.chat_message` for the conversation, `st.session_state` to keep the chat history, and `@st.cache_resource` so the models and the ChromaDB knowledge base load once instead of on every question. Features I added:
+- a LYEINANI-branded dark theme in my brand's red-orange, with suggested starter questions
+- a label on every answer: **"From LYEINANI's answers"** (my Q&A set) or **"From the website"** (site search), with source links, so customers can trust it and I can debug it
+- 👍 / 👎 feedback on each answer, saved to `feedback.csv` so I can see which answers to improve
+- a "Save chat" button that downloads the conversation
+- a per-session question limit, so a public demo can't be spammed
+- developer settings with a live threshold slider, match scores and ChromaDB stats
 
 **8. Put it all in a Colab notebook.** `lyeinani_rag_chatbot.ipynb` runs the whole project step by step on a free GPU, from scraping to a live demo of the chat app.
+
+**9. Fixed the mistakes from my first run and measured the result.** My first run got two answers wrong (see Limitations below), so I made four changes:
+- **Follow-ups:** the bot no longer shows the model its own past answers. A short follow-up like "what about the vest?" is rewritten into a full question that includes the earlier one.
+- **Retrieval:** the page-title boost and score cut-off described in step 4, so a product's own page beats the home page and blog posts that only mention it.
+- **Instructions:** the model must copy names and prices exactly, never move a price from one product to another, and only list items that appear on a collection's own page.
+- **Model:** I moved up from Qwen2.5-1.5B to Qwen2.5-3B, which still fits Colab's free GPU.
+
+To measure the changes, I wrote an accuracy test (`run_eval` in `rag_bot.py`, section 4d of the notebook): 10 questions with known right answers from my site, including both questions it got wrong the first time. Each answer is checked for the facts it must contain, the wrong facts it must not contain, and the route it should take.
+
+RESULTS_PLACEHOLDER
 
 ## Outcome
 
@@ -95,15 +128,15 @@ Each pair has a category, several alternate phrasings and its source page (`lyei
 - When the bot can't find an answer, it says so and points customers to my email instead of making something up.
 - It runs entirely on free tools: Colab, open-source models and Streamlit.
 
-**What I learned:** most of the quality comes from the data, not the model. Cleaning out repeated menus and footers, writing good question variants and tuning the match threshold made a bigger difference than which model writes the answers.
+**What I learned:** testing with real questions mattered more than my starting assumptions. The threshold I picked first (0.80) looked reasonable but sent most real customer phrasings past my own answers, and I only caught that by measuring the scores. The run also showed where the free model is weakest: follow-up questions.
 
-**Limitations:** the free 1.5B model writes simpler answers than a large paid model. The scraped site is a snapshot, so I re-run the scraper when my site changes. And the answers I added in my Q&A set should also go on my policy pages, so both sources agree.
+**Limitations:** in my first version, the free 1.5B model made mistakes on follow-ups. In my test, I asked "How much is the Cursed Arc Trouser?" (correct: $110) and then "what about the vest?". It answered $110 for the Cursed Vessel Vest, copying the price from its previous answer, when my site lists the vest at $75. The right pages were retrieved, so the mistake was in the answer writing (see step 9 for the fix). The scraped site is a snapshot, so I re-run the scraper when my site changes. And the answers I added in my Q&A set should also go on my policy pages, so both sources agree.
 
 **Next steps:** embed the assistant on my Shopify store, turn it into a chat bubble on every page, and add automatic answer-quality checks (for example, with RAGAS).
 
 ## Examples
 
-These show both routes. Q&A answers come back exactly as I wrote them.
+These are real outputs from my Colab run. Q&A answers come back exactly as I wrote them; RAG answers are written by the model from my site pages.
 
 **1. Stored Q&A match**
 > **Customer:** Who pays for return shipping?
@@ -112,8 +145,8 @@ These show both routes. Q&A answers come back exactly as I wrote them.
 >
 > *Route: Q&A · Source: [Refund & Exchange Policy](https://www.lyeinani.com/pages/refund-exchange-policy)*
 
-**2. Paraphrase matched to a stored answer**
-> **Customer:** my preorder doesn't fit, can i swap it for another size?
+**2. Paraphrase matched to a stored answer** (score 0.903)
+> **Customer:** can i swap my preorder for another size
 >
 > **Assistant:** Yes, preorder items can be exchanged if your size is available. The standard exchange rules still apply: submit your claim within 15 business days of delivery, with the item unworn, unwashed, and tags attached.
 >
@@ -129,16 +162,30 @@ These show both routes. Q&A answers come back exactly as I wrote them.
 **4. Product question answered from my site pages (RAG)**
 > **Customer:** How much is the Crimson Bloom Blazer?
 >
-> **Assistant:** *[TO FILL IN: paste the answer from my Colab run, section 4b]*
+> **Assistant:** The Crimson Bloom Blazer costs $185.00 USD.
 >
-> *Route: RAG · Sources: [TO FILL IN]*
+> *Route: RAG · Sources: [Crimson Bloom Blazer](https://www.lyeinani.com/products/nezuko-blazer-1), [Blazers](https://www.lyeinani.com/collections/blazers)*
 
 **5. Collection question answered from my site pages (RAG)**
 > **Customer:** What's in the Tokyo 1992 collection?
 >
-> **Assistant:** *[TO FILL IN: paste the answer from my Colab run, section 4b]*
+> **Assistant:** The Tokyo '92 Collection features five distinctive sweatshirts inspired by popular anime franchises:
+> 1. **Aino '92 Sweatshirt** - Made of 100% cotton, priced at $125.00 USD.
+> 2. **Kino '92 Sweatshirt** - Also made of 100% cotton, priced at $125.00 USD.
+> 3. **Black Crystal '92 Sweatshirt** - Another 100% cotton option, priced at $125.00 USD.
+> 4. **Moon Prism '92 Sweatshirt** - Yet another 100% cotton choice, priced at $125.00 USD.
+> 5. **Pretty Soldier Mini Dress** - Available for $75.00 USD.
 >
-> *Route: RAG · Sources: [TO FILL IN]*
+> These sweatshirts showcase the brand's commitment to reimagining classic anime aesthetics within contemporary fashion.
+>
+> *Route: RAG · Sources: [Tokyo '92 Collection](https://www.lyeinani.com/collections/tokyo-92-club), [Home page](https://www.lyeinani.com/)*
+
+**6. Off-topic question**
+> **Customer:** Do you sell kitchen appliances?
+>
+> **Assistant:** No, LYEINANI does not sell kitchen appliances. They specialize in urban clothing inspired by anime themes.
+>
+> *Route: RAG*
 
 ## Project files
 
@@ -149,6 +196,7 @@ These show both routes. Q&A answers come back exactly as I wrote them.
 | `lyeinani_qa_set.json` | My 22 Q&A pairs (d2) |
 | `rag_bot.py` | The chatbot: embeddings, Q&A routing, site search, answer writing |
 | `app.py` | Streamlit chat app |
+| `.streamlit/config.toml` | The app's LYEINANI brand theme |
 | `requirements.txt` | Python packages |
 | `lyeinani_pdfs/` | My scraped site pages (d1) |
 
@@ -162,9 +210,10 @@ pip install -r requirements.txt
 playwright install chromium
 python lyeinani_scraper.py --ignore-robots   # scrape the site
 python rag_bot.py --test-routing             # check Q&A match scores
+python rag_bot.py --eval                     # score answers against known right answers
 streamlit run app.py                         # open the chat app
 ```
 
 ## Tools I used
 
-Python · Playwright · sentence-transformers (all-MiniLM-L6-v2) · Hugging Face transformers (Qwen2.5-1.5B-Instruct) · pypdf · NumPy · Streamlit · Google Colab
+Python · Playwright · sentence-transformers (all-MiniLM-L6-v2) · ChromaDB · Hugging Face transformers (Qwen2.5-3B-Instruct) · pypdf · NumPy · Streamlit · Google Colab
